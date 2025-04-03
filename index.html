@@ -280,8 +280,19 @@ function nextQuestion() {
 }
 
 function showSummary() {
-    let summaryText = `<strong>${playerName}'s Score: ${score}</strong><br><br>` + answers.join("<br>");
+    // Calculate the percentage score
+    const totalQuestions = 5; // You can adjust this based on the number of questions
+    const percentage = (score / totalQuestions) * 100;
+
+    // Determine the message based on the score percentage
+    let message = percentage < 50 ? "Try Again" : "Nice Job!";
+
+    // Update the popup text with the player's name, score, and message
+    let summaryText = `<strong>${playerName}'s Score: ${score}</strong><br><br>`;
+    summaryText += `<strong>${message}</strong>`;
     document.getElementById("popup-text").innerHTML = summaryText;
+
+    // Show the popup with the result
     document.getElementById("popup").classList.add("show");
 }
 
